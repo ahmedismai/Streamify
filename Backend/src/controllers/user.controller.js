@@ -1,5 +1,5 @@
 import User from './../models/User.js';
-import FriendRequest from './../models/FriendRequest';
+import FriendRequest from './../models/FriendRequest.js';
 
 export async function getAllUsers(req, res){
     try {
