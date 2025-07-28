@@ -3,16 +3,16 @@ import { toast } from 'react-hot-toast';
 import { axiosInstance } from './axios.js';
 
 export const Register = async (signupData)=>{
-        const response = await axiosInstance.post("/auth/signup", signupData)
+        const response = await axiosInstance.post("/api/auth/signup", signupData)
         return response.data
 }
 export const loginResponse = async (loginData)=>{
-        const response = await axiosInstance.post("/auth/login", loginData)
+        const response = await axiosInstance.post("/api/auth/login", loginData)
         return response.data
 }
 export const sendPasswordResetEmail  = async (loginData)=>{
         try {
-                const response = await axiosInstance.post("/auth/forgot-password", loginData)
+                const response = await axiosInstance.post("/api/auth/forgot-password", loginData)
                 toast.success("Reset link sent! Check your inbox.");
                 return response.data
         } catch (error) {
@@ -23,7 +23,7 @@ export const sendPasswordResetEmail  = async (loginData)=>{
 }
 export async function resetPasswordRequest({ password, token }) {
         try {
-            const response = await axiosInstance.post(`/auth/reset-password/${token}`, { password });
+            const response = await axiosInstance.post(`/api/auth/reset-password/${token}`, { password });
             toast.success("Password reset successful! Redirecting to login...");
             return response.data;
         } catch (error) {
@@ -33,12 +33,12 @@ export async function resetPasswordRequest({ password, token }) {
         }
 }    
 export const logout = async ()=>{
-        const response = await axiosInstance.post("/auth/logout")
+        const response = await axiosInstance.post("/api/auth/logout")
         return response.data
 }
 export const getAuthUser = async ()=>{
         try {
-                const res =await axiosInstance.get("/auth/myProfile")
+                const res =await axiosInstance.get("/api/auth/myProfile")
                 return res.data
         } catch (error) {
                 console.log("Error in getAuthUser", error)
@@ -46,35 +46,35 @@ export const getAuthUser = async ()=>{
         }
 }
 export const completeOnboarding = async (userData)=>{
-        const res =await axiosInstance.post("/auth/onboarding", userData)
+        const res =await axiosInstance.post("/api/auth/onboarding", userData)
         return res.data
 }
 export const getUserFriends = async ()=>{
-        const res =await axiosInstance.get("/users/friends")
+        const res =await axiosInstance.get("/api/users/friends")
         return res.data
 }
 export const getRecommendedUsers = async ()=>{
-        const res =await axiosInstance.get("/users")
+        const res =await axiosInstance.get("/api/users")
         return res.data
 }
 export const getOutGoingFriendReqs = async ()=>{
-        const res =await axiosInstance.get("/users/outgoing-friend-requests")
+        const res =await axiosInstance.get("/api/users/outgoing-friend-requests")
         return res.data
 }
 export const sendFriendRequest = async (userId)=>{
-        const res =await axiosInstance.post(`/users/friend-request/${userId}`)
+        const res =await axiosInstance.post(`/api/users/friend-request/${userId}`)
         return res.data
 }
 export const acceptFriendRequest = async (requestId)=>{
-        const res =await axiosInstance.put(`/users/friend-request/${requestId}/accept`)
+        const res =await axiosInstance.put(`/api/users/friend-request/${requestId}/accept`)
         return res.data
 }
 export const getFriendRequest = async ()=>{
-        const res =await axiosInstance.get(`/users/friend-request`)
+        const res =await axiosInstance.get(`/api/users/friend-request`)
         return res.data
 }
 
 export const getStreamToken = async ()=>{
-        const res =await axiosInstance.get(`/chat/token`)
+        const res =await axiosInstance.get(`/api/chat/token`)
         return res.data
 }
