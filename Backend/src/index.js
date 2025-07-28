@@ -25,9 +25,9 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/auth", authRouter);
-app.use("/api/users", userRouter);
-app.use("/api/chat", chatRouter);
+app.use("/auth", authRouter);
+app.use("/users", userRouter);
+app.use("/chat", chatRouter);
 
 app.get("/" , (req,res)=> {
   return res.status(200).json("Hello World!")
