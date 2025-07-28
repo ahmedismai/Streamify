@@ -1,9 +1,9 @@
 import express from "express";
-import authRouter from "./routes/auth.route.js";
-import userRouter from "./routes/user.route.js";
-import chatRouter from "./routes/chat.route.js";
+import authRouter from "../routes/auth.route.js";
+import userRouter from "../routes/user.route.js";
+import chatRouter from "../routes/chat.route.js";
 import "dotenv/config";
-import { connectDB } from "./lib/db.js";
+import { connectDB } from "../lib/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "node:path";
