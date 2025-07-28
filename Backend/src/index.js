@@ -16,12 +16,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(
-  cors()
-  // cors({
-  //   origin: ["http://localhost:5173", "https://streamify-fsld.vercel.app"],
-  //   credentials: true,
-  //   methods: ["GET", "POST", "PUT", "DELETE"]
-  // })
+  // cors()
+  cors({
+    origin: ["http://localhost:5173", "https://streamify-fsld.vercel.app"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"]
+  })
 );
 app.use(express.json());
 app.use(cookieParser());
