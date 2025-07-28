@@ -31,7 +31,7 @@ export default function Onboarding() {
   }
   const handleRandomAvatar = ()=>{
     const idx = Math.floor(Math.random() * 100) + 1;
-    const randomAvatar = `https://api.dicebear.com/7.x/thumbs/png?seed=user-${idx}`
+    const randomAvatar = `https://avatar-placeholder.iran.liara.run/${idx}`
 
     setFormState({...formState , profilePic:randomAvatar});
     toast.success("Random profile picture generated!")
