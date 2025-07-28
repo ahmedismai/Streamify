@@ -24,7 +24,7 @@ const __dirname = path.dirname(__filename);
 //   // })
 // );
 app.use(cors({
-  origin: ["http://localhost:5173", "https://streamify-fsld.vercel.app"],
+  origin: ["http://localhost:5173", "https://streamify-6saj.vercel.app"],
   credentials: true,
 }));
 app.use(express.json());
