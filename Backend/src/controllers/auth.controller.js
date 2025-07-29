@@ -168,7 +168,6 @@ export async function forgotPassword(req, res){
 
         const resetToken = user.generateResetToken();
 
-        
                 await user.save();
                 const resetURLBackend = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
                 const resetURLVercel = `https://streamify-6saj.vercel.app/reset-password/${resetToken}`;
@@ -190,7 +189,11 @@ export async function forgotPassword(req, res){
                 subject: "Password Reset Request",
                 html: message,
             });
-        res.status(200).json({ success: true, message: "Reset link sent", resetURL });
+        res.status(200).json({ success: true, message: "Reset link sent", links: {
+            backend: resetURLBackend,
+            vercel: resetURLVercel,
+            netlify: resetURLNetlify,
+          }, });
     } catch (error) {
         console.error("Forgot password error:", error);
         res.status(500).json("Server error. Please try again later.")
