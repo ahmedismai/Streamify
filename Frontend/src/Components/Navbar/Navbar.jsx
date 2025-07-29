@@ -25,29 +25,19 @@ export default function Navbar() {
         <div className='container mx-auto sm:px-6 lg:px-8'>
             <div className='flex items-center justify-end w-full'>
                 {/* logo only in the chat page  */}
-                {isChatPage && (
+                {isChatPage || window.innerWidth < 640 && (
                 <div className='pl-5'>
                 <Link to={"/"} className='flex items-center gap-2.5'>
                     <ShipWheelIcon className='size-9 text-primary'/>
-                    <span className='text-3xl font-mono font-bold text-transparent 
+                    <span className='text-md sm:text-3xl font-mono font-bold text-transparent 
                         bg-gradient-to-r from-primary to-secondary bg-clip-text tracking-wider'>
                         Streamify
                     </span>
                 </Link>
                 </div>
             )}
-            {(window.innerWidth < 640) && (
-                <div className='pl-5 sm:hidden md:flex'>
-                    <Link to={"/"} className='flex items-center gap-2.5'>
-                    <ShipWheelIcon className='size-9 text-primary' />
-                    <span className='text-xl font-mono font-bold text-transparent 
-                        bg-gradient-to-r from-primary to-secondary bg-clip-text tracking-wider'>
-                        Streamify
-                    </span>
-                    </Link>
-                </div>
-                )}
-            <div className='flex items-center gap-3 sm:gap-4 ml-auto relative'>
+          
+            <div className='flex items-center gap-2 sm:gap-4 ml-auto relative'>
                 <Link to={'/notifications'}>
                     <button className='btn btn-ghost btn-circle'>
                         <BellIcon className='size-6 text-base-content opacity-70'/>
