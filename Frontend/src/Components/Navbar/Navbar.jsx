@@ -25,7 +25,7 @@ export default function Navbar() {
         <div className='container mx-auto sm:px-6 lg:px-8'>
             <div className='flex items-center justify-end w-full'>
                 {/* logo only in the chat page  */}
-                {isChatPage || window.innerWidth < 640 || isChatPage && window.innerWidth < 640 && (
+                {isChatPage || window.innerWidth < 640 && (
                 <div className='pl-5'>
                 <Link to={"/"} className='flex items-center gap-2.5'>
                     <ShipWheelIcon className='size-9 text-primary'/>
