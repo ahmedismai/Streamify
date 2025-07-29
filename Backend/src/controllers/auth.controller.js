@@ -168,11 +168,18 @@ export async function forgotPassword(req, res){
 
         const resetToken = user.generateResetToken();
                 await user.save();
-                const resetURL = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+                const resetURLBackend = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+                const resetURLVercel = `https://streamify-6saj.vercel.app/reset-password/${resetToken}`;
+                const resetURLNetlify = `https://lingostream.netlify.app/reset-password/${resetToken}`;
                 const message = `
                 <p>You requested a password reset.</p>
                 <p>Click the link below to reset your password:</p>
-                <a href="${resetURL}" target="_blank">${resetURL}</a>
+                <p>If you want a backend url</p>
+                <a href="${resetURLBackend}" target="_blank">${resetURLBackend}</a>
+                <p>If you use frontend with vercel:</p>
+                <a href="${resetURLVercel}" target="_blank">${resetURLVercel}</a>
+                <p>If you use frontend with netlify:</p>
+                <a href="${resetURLNetlify}" target="_blank">${resetURLNetlify}</a>
                 <p>This link will expire in 10 minutes.</p>
             `;
             
