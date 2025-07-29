@@ -167,7 +167,6 @@ export async function forgotPassword(req, res){
     if (!user) return res.status(404).json({ message: "User not found" });
 
         const resetToken = user.generateResetToken();
-        
                 await user.save();
                 const resetURL = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
                 const message = `
