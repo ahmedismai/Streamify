@@ -29,7 +29,7 @@ export default function Navbar() {
                 <div className='pl-5'>
                 <Link to={"/"} className='flex items-center gap-2.5'>
                     <ShipWheelIcon className='size-9 text-primary'/>
-                    <span className='text-3xl font-mono font-bold text-transparent 
+                    <span className='text-xl sm:text-3xl font-mono font-bold text-transparent 
                         bg-gradient-to-r from-primary to-secondary bg-clip-text tracking-wider'>
                         Streamify
                     </span>
