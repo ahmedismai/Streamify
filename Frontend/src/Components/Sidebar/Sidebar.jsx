@@ -2,11 +2,16 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { BellIcon, HomeIcon, ShipWheelIcon, UserIcon } from 'lucide-react';
 import useAuthUser from '../../hooks/useAuthUser';
+import useQueryHooks from '../../hooks/useQuery';
+import { getFriendRequest } from '../../lib/api';
 
 export default function Sidebar() {
     const {authUser} = useAuthUser()
     const location = useLocation()
     const currentPath = location.pathname
+    const {data:friendRequest , isLoading} =useQueryHooks( getFriendRequest , "friendRequests")
+  
+  const inComingRequests =friendRequest?.inComingReqs || []
 return (
     <aside className='w-64 bg-base-200 border-r border-base-300 hidden lg:flex flex-col h-screen sticky top-0'>
         <div className='p-5 border-b border-base-300 '>
@@ -30,6 +35,7 @@ return (
         <Link to={'/notifications'} className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${currentPath === "/notifications" ? "btn-active":""}`}>
         <BellIcon className='size-5 text-base-content opacity-70'/>
         <span>Notifications</span>
+        {inComingRequests?.length > 0 ? <span className='bg-emerald-500 rounded-full size-5 flex items-center justify-center'>{inComingRequests?.length}</span> : ""}
         </Link>
     </nav>
     <div className='p-4 border-t border-base-300 mt-auto'>

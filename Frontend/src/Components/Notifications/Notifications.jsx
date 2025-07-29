@@ -36,7 +36,7 @@ export default function Notifications() {
               Friend Requests
               <span className='badge badge-primary ml-2'>{inComingRequests.length}</span>
             </h2>
-
+            
             <div className='space-y-3'>
             {inComingRequests.map((request) => (
             <div key={request._id} className='card bg-base-200 shadow-sm hover:shadow-md transition-shadow'>
