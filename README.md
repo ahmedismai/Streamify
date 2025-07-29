@@ -32,14 +32,14 @@ JWT_SECRET_KEY=your_jwt_secret
 NODE_ENV=development
 
 ---
-###💻 Frontend (/frontend)
+- ###💻 Frontend (/frontend)
 
 ```env
 VITE_STREAM_API_KEY=your_stream_api_key
 
 ---
 
-###🔧 Run the Backend
+- ###🔧 Run the Backend
 
 ```bash
 cd backend
@@ -47,14 +47,14 @@ npm install
 npm run dev
 ---
 
-###💻 Run the Frontend
+- ###💻 Run the Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 
 ---
-## 🚀 Live Demo
+- ## 🚀 Live Demo
 
-**Frontend**: [https://streamify-6saj.vercel.app](https://lingostream.netlify.app/)  
-**Backend**: [https://streamify-production-27b0.up.railway.app](https://streamify-production-27b0.up.railway.app)
+- **Frontend**: [https://streamify-6saj.vercel.app](https://lingostream.netlify.app/)  
+- **Backend**: [https://streamify-production-27b0.up.railway.app](https://streamify-production-27b0.up.railway.app)
