@@ -167,6 +167,8 @@ export async function forgotPassword(req, res){
     if (!user) return res.status(404).json({ message: "User not found" });
 
         const resetToken = user.generateResetToken();
+
+        
                 await user.save();
                 const resetURLBackend = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
                 const resetURLVercel = `https://streamify-6saj.vercel.app/reset-password/${resetToken}`;
