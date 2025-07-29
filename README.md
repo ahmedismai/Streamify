@@ -31,10 +31,13 @@ STEAM_API_SECRET=your_steam_api_secret
 JWT_SECRET_KEY=your_jwt_secret  
 NODE_ENV=development
 
+---
 ###💻 Frontend (/frontend)
 
 ```env
 VITE_STREAM_API_KEY=your_stream_api_key
+
+---
 
 ###🔧 Run the Backend
 
@@ -42,7 +45,7 @@ VITE_STREAM_API_KEY=your_stream_api_key
 cd backend
 npm install
 npm run dev
-
+---
 
 ###💻 Run the Frontend
 ```bash
@@ -50,7 +53,7 @@ cd frontend
 npm install
 npm run dev
 
-
+---
 ## 🚀 Live Demo
 
 **Frontend**: [https://streamify-6saj.vercel.app](https://lingostream.netlify.app/)  
