@@ -30,6 +30,7 @@ STEAM_API_KEY=your_steam_api_key
 STEAM_API_SECRET=your_steam_api_secret  
 JWT_SECRET_KEY=your_jwt_secret  
 NODE_ENV=development
+```   ← هنا قفلنا بلوك الكود
 
 ---
 
@@ -37,24 +38,35 @@ NODE_ENV=development
 
 ```env
 VITE_STREAM_API_KEY=your_stream_api_key
+```   ← قفلنا بلوك الكود تاني
 
 ---
 
-- ###🔧 Run the Backend
+### 🔧 Run the Backend
 
 ```bash
 cd backend
 npm install
 npm run dev
+```   ← وقفلنا هنا كمان
 
 ---
 
+### 💻 Run the Frontend
 
-###💻 Run the Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
+```   ← وقفلنا آخر بلوك
+
+---
+
+## 🚀 Live Demo
+
+**Frontend**: https://streamify-6saj.vercel.app  
+**Backend**: https://streamify-production-27b0.up.railway.app
+
 
 ---
 
