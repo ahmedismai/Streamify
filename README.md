@@ -64,5 +64,6 @@ npm run dev
 
 ## 🚀 Live Demo
 
- **Frontend**: [https://streamify-6saj.vercel.app](https://lingostream.netlify.app/)  
+ **Frontend**: [https://lingostream.netlify.app](https://lingostream.netlify.app/)  
+ **Frontend**: [https://streamify-6saj.vercel.app](https://streamify-6saj.vercel.app)  
  **Backend**: [https://streamify-production-27b0.up.railway.app](https://streamify-production-27b0.up.railway.app)
