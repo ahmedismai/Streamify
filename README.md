@@ -21,7 +21,7 @@
 
 ## 🧪 .env Setup
 
-### 📦 Backend (`/backend`)
+### 📦 Backend (`/Backend`)
 
 ```env
 PORT=5001  
@@ -30,15 +30,15 @@ STEAM_API_KEY=your_steam_api_key
 STEAM_API_SECRET=your_steam_api_secret  
 JWT_SECRET_KEY=your_jwt_secret  
 NODE_ENV=development
-```   ← هنا قفلنا بلوك الكود
+```
 
 ---
 
-### 💻 Frontend (`/frontend`)
+### 💻 Frontend (`/Frontend`)
 
 ```env
 VITE_STREAM_API_KEY=your_stream_api_key
-```   ← قفلنا بلوك الكود تاني
+```
 
 ---
 
@@ -48,7 +48,7 @@ VITE_STREAM_API_KEY=your_stream_api_key
 cd backend
 npm install
 npm run dev
-```   ← وقفلنا هنا كمان
+```
 
 ---
 
@@ -58,7 +58,7 @@ npm run dev
 cd frontend
 npm install
 npm run dev
-```   ← وقفلنا آخر بلوك
+```
 
 ---
 
