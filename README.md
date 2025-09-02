@@ -66,5 +66,5 @@ npm run dev
 
  **Frontend**: [https://lingostream.netlify.app](https://lingostream.netlify.app/)  
  **Frontend**: [https://streamify-6saj.vercel.app](https://streamify-6saj.vercel.app)  
- **Backend**: [https://streamify-production-27b0.up.railway.app](https://streamify-production-27b0.up.railway.app)
+ **Backend**: [https://streamify-4ov3.vercel.app](https://streamify-4ov3.vercel.app)
   **Documention postman**: [https://documenter.getpostman.com/view/40957867/2sB3B7Qa4m](https://documenter.getpostman.com/view/40957867/2sB3B7Qa4m)
