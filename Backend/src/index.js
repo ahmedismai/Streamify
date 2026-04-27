@@ -40,6 +40,7 @@ app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/chat", chatRouter);
 
+
 app.get("/", (req, res) => {
   return res.status(200).json("Hello World!");
 });
