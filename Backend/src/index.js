@@ -44,6 +44,7 @@ app.use("/chat", chatRouter);
 app.get("/", (req, res) => {
   return res.status(200).json("Hello World!");
 });
+
 if (process.env.NODE_ENV === "production") {
   const frontendPath = path.join(__dirname, "../../frontend/dist");
   app.use(express.static(frontendPath));
