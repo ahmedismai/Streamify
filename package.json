@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build":"npm install --prefix Backend && npm install --prefix Frontend && npm run build --prefix Frontend ",
-    "start":"npm run start --prefix Backend"
+    "build": "npm run build --workspace Frontend",
+    "start": "npm run start --workspace Backend"
   },
+  "workspaces": [
+    "Backend",
+    "Frontend"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
