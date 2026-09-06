@@ -1,6 +1,5 @@
 import React from 'react'
-import style from "./ChatLoader.module.css"
-import { LoaderIcon } from 'react-hot-toast'
+import { LoaderIcon } from 'lucide-react'
 export default function ChatLoader() {
   return (
     <div className='h-screen flex flex-col items-center justify-center p-4'>

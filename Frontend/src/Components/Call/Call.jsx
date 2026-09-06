@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import style from "./Call.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuthUser from "../../hooks/useAuthUser";
 import { useQuery } from "@tanstack/react-query";
@@ -17,6 +16,7 @@ import {
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { toast } from "react-hot-toast";
 import PageLoader from "../PageLoader/PageLoader";
+import { getAvatarUrl } from "../../lib/avatar";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
@@ -41,7 +41,7 @@ export default function Call() {
         const user = {
           id: authUser._id,
           name: authUser.name,
-          image: authUser.profilePic,
+          image: getAvatarUrl(authUser),
         };
 
         const videoClient = new StreamVideoClient({

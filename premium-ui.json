@@ -1,0 +1,9 @@
+{
+  "sourceRoots": ["Frontend/src"],
+  "ownership": {
+    "Select/Listbox": "native",
+    "Scrollbar": "Frontend/src/index.css",
+    "Toast": "react-hot-toast",
+    "Form": "native browser validation with existing submit handlers"
+  }
+}

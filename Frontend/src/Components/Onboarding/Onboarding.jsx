@@ -1,5 +1,4 @@
 import React from 'react'
-import style from "./Onboarding.module.css"
 import useAuthUser from '../../hooks/useAuthUser.js'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
@@ -7,6 +6,7 @@ import { completeOnboarding } from '../../lib/api.js'
 import { CameraIcon, LoaderIcon, MapPinIcon, ShipWheelIcon, ShuffleIcon } from 'lucide-react'
 import { LANGUAGES } from '../../constants/index.js'
 import useHooksMutation from '../../hooks/useMutation.js'
+import Avatar from '../Avatar/Avatar.jsx'
 
 
 
@@ -22,7 +22,7 @@ export default function Onboarding() {
     profilePic: authUser?.profilePic || "",
   })
 
-  const {isPending, error, mutate} = useHooksMutation(completeOnboarding)
+  const {isPending, mutate} = useHooksMutation(completeOnboarding)
   
 
   const handleSubmit = (e)=>{
@@ -38,17 +38,25 @@ export default function Onboarding() {
   }
 
   return (
-    <div className='min-h-screen flex justify-center items-center p-4 bg-base-100'>
-      <div className='card bg-base-200 w-full max-w-3xl shadow-xl'>
-        <div className='card-body p-6 sm:p-8'>
-          <h1 className=' text-2xl sm:text-3xl font-bold text-center mb-6 '>
+    <div className='streamify-auth-bg'>
+      <div className='streamify-card w-full max-w-3xl'>
+        <div className='p-6 sm:p-8'>
+          <h1 className='streamify-title text-center mb-2'>
             Complete Your Profile
           </h1>
+          <p className='streamify-subtitle text-center mx-auto mb-8'>
+            Tell partners what you speak, what you are learning, and where conversations can begin.
+          </p>
           <form onSubmit={handleSubmit} className='space-y-6 '>
             <div className='flex items-center justify-center flex-col space-y-4'>
-              <div className='size-32 rounded-full bg-base-300 overflow-hidden'>
+              <div className='size-32 rounded-full bg-base-300 overflow-hidden shadow-xl'>
                 {formState?.profilePic ? (
-                  <img src={formState?.profilePic} alt="Profile Preview" className='w-full h-full object-cover' />
+                  <Avatar
+                    src={formState?.profilePic}
+                    user={{ name: formState?.fullName, profilePic: formState?.profilePic }}
+                    alt="Profile Preview"
+                    size='size-32'
+                  />
                 ) : (
                   <div className='flex items-center justify-center h-full'>
                     <CameraIcon className='size-12 text-base-content opacity-40'/>
@@ -57,7 +65,7 @@ export default function Onboarding() {
               </div>
 
               <div className='flex items-center gap-2'>
-                <button type='button' onClick={handleRandomAvatar} className='btn btn-accent'>
+                <button type='button' onClick={handleRandomAvatar} className='btn btn-accent rounded-xl'>
                   <ShuffleIcon className='size-4 mr-2'/>
                   Generate Random Avatar
                 </button>
@@ -68,7 +76,7 @@ export default function Onboarding() {
                     <label className='label'>
                       <span className='label-text'>Full Name</span>
                     </label>
-                    <input type="text" name='fullName' placeholder='Enter Your Full Name' className='input input-bordered w-full'
+                    <input type="text" name='fullName' placeholder='Enter Your Full Name' className='input input-bordered streamify-input w-full'
                       value={formState?.fullName}
                       onChange={(e)=>{setFormState({...formState , fullName: e.target.value})}}
                       required
@@ -81,7 +89,7 @@ export default function Onboarding() {
                     </label>
                     <input type="text" name='bio' 
                       placeholder='Tell other about yourself and your language learning goals '
-                      className='textarea textarea-bordered h-24'
+                      className='textarea textarea-bordered streamify-input h-24 resize-none'
                       value={formState?.bio}
                       onChange={(e)=>{setFormState({...formState , bio: e.target.value})}}
                       required
@@ -96,7 +104,7 @@ export default function Onboarding() {
                   <select name="nativeLanguage"
                   value={formState?.nativeLanguage}
                   onChange={(e)=>setFormState({...formState , nativeLanguage: e.target.value})}
-                  className='select select-bordered w-full'
+                  className='select select-bordered streamify-input w-full'
                   >
                     <option value="">
                       Select your native language 
@@ -117,7 +125,7 @@ export default function Onboarding() {
                   <select name="learningLanguage"
                   value={formState?.learningLanguage}
                   onChange={(e)=>setFormState({...formState , learningLanguage: e.target.value})}
-                  className='select select-bordered w-full'
+                  className='select select-bordered streamify-input w-full'
                   >
                     <option value="">
                       Select you're learning
@@ -141,13 +149,13 @@ export default function Onboarding() {
                       name='location'
                       value={formState?.location}
                       onChange={(e)=>{setFormState({...formState , location: e.target.value})}}
-                      className='input input-bordered w-full pl-10'
+                      className='input input-bordered streamify-input w-full pl-10'
                       placeholder='City, Country'
                     />
                 </div>
               </div>
 
-              <button className='btn btn-primary w-full ' type='submit' disabled={isPending}>
+              <button className='btn btn-primary w-full min-h-12 rounded-xl' type='submit' disabled={isPending}>
                 {!isPending ? (<>
                   <ShipWheelIcon className='size-5 mr-2'/>
                   Complete Onboarding

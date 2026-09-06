@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import style from "./Chat.module.css"
 import { useParams } from 'react-router-dom'
 import useAuthUser from '../../hooks/useAuthUser'
 import { getStreamToken } from '../../lib/api'
@@ -9,6 +8,7 @@ import { toast } from 'react-hot-toast'
 import ChatLoader from '../ChatLoader/ChatLoader'
 import { StreamChat } from 'stream-chat'
 import CallButton from '../CallButton/CallButton'
+import { getAvatarUrl } from '../../lib/avatar'
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY
 
@@ -34,7 +34,7 @@ export default function ChatPage() {
         await client.connectUser({
           id:authUser._id,
           name:authUser.name, 
-          Image:authUser.profilePic
+          image:getAvatarUrl(authUser)
         }, tokenData.token)
 
         const channelId = [authUser._id ,id].sort().join("-")
@@ -69,10 +69,10 @@ export default function ChatPage() {
     return <ChatLoader/>
   }
   return (
-    <div className='h-[93vh]'>
+    <div className='h-[calc(100vh-4rem)] p-3 sm:p-4'>
       <Chat client={chatClient}>
         <Channel channel={channel}>
-          <div className='w-full relative '>
+          <div className='w-full h-full relative'>
             <CallButton handleVideoCall={handleVideoCall}/>
             <Window>
               <ChannelHeader/>

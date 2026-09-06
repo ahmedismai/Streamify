@@ -1,5 +1,10 @@
 export const THEMES = [
     {
+      name: "streamify",
+      label: "Streamify",
+      colors: ["#ffffff", "#14b8a6", "#fb5f65", "#101827"],
+    },
+    {
       name: "light",
       label: "Light",
       colors: ["#ffffff", "#5a67d8", "#8b5cf6", "#1a202c"],

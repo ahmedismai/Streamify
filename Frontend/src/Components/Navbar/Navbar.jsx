@@ -6,32 +6,34 @@ import useHooksMutation from '../../hooks/useMutation'
 import { BellIcon, LogOutIcon, ShipWheelIcon } from 'lucide-react'
 import ThemesSelector from '../ThemesSelector/ThemesSelector'
 import useQueryHooks from '../../hooks/useQuery'
+import Avatar from '../Avatar/Avatar'
 
 export default function Navbar() {
     const {authUser} = useAuthUser()
     const location = useLocation()
     const isChatPage = location.pathname?.startsWith("/chat")
-    const {isPending, error, mutate} = useHooksMutation(logout)
+    const {mutate} = useHooksMutation(logout)
 
 
-  const {data:friendRequest , isLoading} =useQueryHooks( getFriendRequest , "friendRequests")
+  const {data:friendRequest} =useQueryHooks( getFriendRequest , "friendRequests")
   
   const inComingRequests =friendRequest?.inComingReqs || []
 
 
 
   return (
-    <nav className='bg-base-200 border-b border-base-300 sticky top-0 z-30 h-16 flex items-center'>
-        <div className='container mx-auto sm:px-6 lg:px-8'>
+    <nav className='streamify-topbar border-b sticky top-0 z-30 h-16 flex items-center'>
+        <div className='w-full px-4 sm:px-6 lg:px-8'>
             <div className='flex items-center justify-end w-full'>
                 {/* logo only in the chat page  */}
                 
                 {isChatPage && (
-                <div className='pl-5'>
+                <div className='pl-1'>
                 <Link to={"/"} className='flex items-center gap-2.5'>
-                    <ShipWheelIcon className='size-9 text-primary'/>
-                    <span className='text-md sm:text-3xl font-mono font-bold text-transparent 
-                        bg-gradient-to-r from-primary to-secondary bg-clip-text tracking-wider'>
+                    <span className='streamify-logo-mark'>
+                        <ShipWheelIcon className='size-6'/>
+                    </span>
+                    <span className='streamify-brand-text text-xl sm:text-2xl'>
                         Streamify
                     </span>
                 </Link>
@@ -39,23 +41,17 @@ export default function Navbar() {
             )}
           
             <div className='flex items-center gap-2 sm:gap-4 ml-auto relative'>
-                <Link to={'/notifications'}>
-                    <button className='btn btn-ghost btn-circle'>
+                <Link to={'/notifications'} className='btn btn-ghost btn-circle hover:bg-primary/10' aria-label='Notifications'>
                         <BellIcon className='size-6 text-base-content opacity-70'/>
-                        {inComingRequests?.length > 0 ? <span className='absolute top-5 left-5 bg-emerald-500 rounded-full size-5 flex items-center justify-center'>{inComingRequests?.length}</span> : ""}
-                    </button>
+                        {inComingRequests?.length > 0 ? <span className='absolute top-4 left-5 bg-secondary text-secondary-content rounded-full size-5 text-xs font-bold flex items-center justify-center'>{inComingRequests?.length}</span> : ""}
                 </Link>
             </div>
             
             <ThemesSelector/>
 
-            <div className='avatar mx-2'>
-                <div className='w-9 rounded-full'>
-                    <img src={authUser?.profilePic} alt="User Avatar" rel='noreferrer' />
-                </div>
-            </div>
+            <Avatar user={authUser} size='size-10' className='mx-2' />
 
-            <button className='btn btn-ghost btn-circle' onClick={mutate}>
+            <button className='btn btn-ghost btn-circle hover:bg-secondary/10' onClick={mutate}>
                 <LogOutIcon className='size-6 text-base-content opacity-70'/>
             </button>
             </div>

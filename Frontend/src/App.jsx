@@ -1,4 +1,4 @@
-  import React from 'react';
+  import React, { useEffect } from 'react';
   import './App.css'
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Home from './Components/Home/Home.jsx';
@@ -24,13 +24,17 @@ function App() {
   const isOnBoarded = authUser?.isOnBoarded 
   const {theme}=useThemeStore()
 
-  if (isLoading) {
-    return <PageLoader/>
-  }
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    document.body.setAttribute('data-theme', theme)
+  }, [theme])
 
   return ( <>
     
-    <div className='h-screen' data-theme={theme}>
+    <div className='min-h-screen streamify-shell' data-theme={theme}>
+      {isLoading ? (
+        <PageLoader/>
+      ) : (
       <Routes>
         <Route path='/' element={isAuthenticated && isOnBoarded ? (<Layout showSidebar={true}><Home/></Layout>) : <Navigate to={!isAuthenticated ? "/login" :"/onboarding"}/> }/>
         <Route path='/signup' element={!isAuthenticated ? <Signup/> : <Navigate to={isOnBoarded ? "/" : "/onboarding"}/>}/>
@@ -43,6 +47,7 @@ function App() {
         <Route path='/friends' element={isAuthenticated && isOnBoarded ?<Layout showSidebar={true}><Friends/></Layout> : <Navigate to={!isAuthenticated ? "/login" :"/onboarding"}/> }/>
         <Route path='/onboarding' element={isAuthenticated ? (!isOnBoarded ? (<Onboarding/>) : (<Navigate to="/"/>)) : <Navigate to="/login" />}/>
       </Routes>
+      )}
       <Toaster/>
     </div>
   

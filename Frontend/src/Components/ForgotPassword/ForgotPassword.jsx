@@ -13,10 +13,10 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md p-6 bg-base-100 rounded shadow-md border">
-        <h2 className="text-xl font-bold mb-4">Forgot Your Password?</h2>
-        <p className="mb-4 text-sm opacity-70">Enter your email to receive a password reset link.</p>
+    <div className="streamify-auth-bg">
+      <div className="streamify-card w-full max-w-md p-6 sm:p-8">
+        <h2 className="streamify-title mb-3">Forgot Your Password?</h2>
+        <p className="mb-5 text-sm opacity-70">Enter your email to receive a password reset link.</p>
 
         {error && (
           <div className="alert alert-error mb-4">
@@ -34,12 +34,12 @@ export default function ForgotPassword() {
           <input
             type="email"
             placeholder="you@example.com"
-            className="input input-bordered w-full"
+            className="input input-bordered streamify-input w-full"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <button className="btn btn-primary w-full" type="submit" disabled={isPending}>
+          <button className="btn btn-primary w-full min-h-12 rounded-xl" type="submit" disabled={isPending}>
             {isPending ? "Sending..." : "Send Reset Link"}
           </button>
         </form>

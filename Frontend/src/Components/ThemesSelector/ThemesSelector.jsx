@@ -8,7 +8,13 @@ export default function ThemesSelector() {
 
   return (
     <div className='dropdown dropdown-end'>
-      <button tabIndex={0} className='btn btn-ghost btn-circle'>
+      <button
+        type='button'
+        tabIndex={0}
+        className='btn btn-ghost btn-circle hover:bg-primary/10'
+        aria-label='Choose theme'
+        onClick={(event) => event.currentTarget.focus()}
+      >
         <PaletteIcon className='size-5' />
       </button>
 

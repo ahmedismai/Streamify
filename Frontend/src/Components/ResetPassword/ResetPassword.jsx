@@ -27,9 +27,9 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md p-6 bg-base-100 rounded shadow-md border">
-        <h2 className="text-xl font-bold mb-4">Reset Password</h2>
+    <div className="streamify-auth-bg">
+      <div className="streamify-card w-full max-w-md p-6 sm:p-8">
+        <h2 className="streamify-title mb-4">Reset Password</h2>
 
         {error && (
           <div className="alert alert-error mb-4">
@@ -47,7 +47,7 @@ export default function ResetPassword() {
           <input
             type="password"
             placeholder="New Password"
-            className="input input-bordered w-full"
+            className="input input-bordered streamify-input w-full"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -55,12 +55,12 @@ export default function ResetPassword() {
           <input
             type="password"
             placeholder="Confirm New Password"
-            className="input input-bordered w-full"
+            className="input input-bordered streamify-input w-full"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          <button className="btn btn-primary w-full" type="submit" disabled={isPending}>
+          <button className="btn btn-primary w-full min-h-12 rounded-xl" type="submit" disabled={isPending}>
             {isPending ? 'Resetting...' : 'Reset Password'}
           </button>
         </form>

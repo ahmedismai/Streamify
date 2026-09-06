@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import style from "./Home.module.css";
 import useQueryHooks from '../../hooks/useQuery';
 import { getOutGoingFriendReqs, getRecommendedUsers, getUserFriends, sendFriendRequest } from '../../lib/api';
 import useHooksMutation from '../../hooks/useMutation';
 import { Link } from 'react-router-dom';
 import { CheckCircleIcon, MapPinIcon, UserPlusIcon, UsersIcon } from 'lucide-react';
 import NoFriendsFound from '../NoFriendsFound/NoFriendsFound';
-import { getLanguageFlag } from '../FriendCard/FriendCard';
+import { getLanguageFlag } from '../../lib/languageFlag.jsx';
 import FriendCard from './../FriendCard/FriendCard';
 import { capitalize } from './../../lib/utils';
+import Avatar from '../Avatar/Avatar.jsx';
 
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
   const {data: friendsData = [], isLoading: loadingFriends} = useQueryHooks(getUserFriends, 'friends'); 
   const {data: recommendedUser = [], isLoading: loadingUsers} = useQueryHooks(getRecommendedUsers, 'users'); 
   const {data: outGoingFriendReqs = []} = useQueryHooks(getOutGoingFriendReqs, 'outGoingFriendReqs'); 
-  const {isPending, error, mutate} = useHooksMutation(sendFriendRequest,"outGoingFriendReqs")
+  const {isPending, mutate} = useHooksMutation(sendFriendRequest,"outGoingFriendReqs")
 
   useEffect(() => {    
     const outGoingReqsArr = outGoingFriendReqs?.outGoingReqs || [];
@@ -32,11 +32,14 @@ export default function Home() {
   }, [outGoingFriendReqs]);
   
   return (
-    <div className='p-4 sm:p-6 lg:p-8'>
-      <div className='container mx-auto space-y-10'>
-        <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 '>
-          <h2 className='text-2xl sm:text-3xl font-bold tracking-tight'>Your Friends</h2>
-          <Link to={"/notifications"} className='btn btn-outline btn-sm '>
+    <div className='streamify-page'>
+      <div className='space-y-10'>
+        <div className='streamify-section-head'>
+          <div>
+            <h2 className='streamify-title'>Your Friends</h2>
+            <p className='streamify-subtitle'>Keep conversations close and jump back into practice sessions quickly.</p>
+          </div>
+          <Link to={"/notifications"} className='btn btn-outline btn-sm rounded-xl'>
             <UsersIcon className='mr-2 size-4 '/>
             Friend Requests
           </Link>
@@ -49,7 +52,7 @@ export default function Home() {
           friendsData.length === 0 ? (
             <NoFriendsFound/>
           ) : (
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4'>
               {friendsData.map((friend)=>(
                 <FriendCard key={friend._id} friend={friend}/>
               ))}
@@ -59,10 +62,10 @@ export default function Home() {
 
         <section>
           <div className='mb-6 sm:mb-8'>
-            <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>
+            <div className='streamify-section-head'>
               <div>
-                <h2 className='text-2xl sm:text-3xl font-bold tracking-tight '>Meet New Learners</h2>
-                <p className='opacity-70'>Discover perfect language exchange partners based on your profile</p>
+                <h2 className='streamify-title'>Meet New Learners</h2>
+                <p className='streamify-subtitle'>Discover perfect language exchange partners based on your profile</p>
               </div>
             </div>
           </div>
@@ -73,25 +76,23 @@ export default function Home() {
           </div>
         ) :(
           recommendedUser.length === 0 ? (
-            <div className="card bg-base-200 p-6 text-center">
+            <div className="streamify-empty">
               <h3 className="font-semibold text-lg mb-2">No recommendations available</h3>
               <p className="text-base-content opacity-70 ">
                   Check back later for new language partners!
               </p>
           </div>
           ) : (
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5'>
               {recommendedUser.map((user)=>{
                 const hasRequestBeenSent = outGoingRequestsIde.has(user._id)
                 return (
-                  <div key={user._id} className='card bg-base-200 hover:shadow-lg transition-all duration-300'>
-                    <div className='card-body p-5 space-y-4'>
+                  <div key={user._id} className='streamify-card streamify-card-hover'>
+                    <div className='p-5 space-y-4'>
                       <div className='flex items-center gap-3'>
-                        <div className='avatar size-16 rounded-full'>
-                          <img src={user.profilePic} alt={user.name} />
-                        </div>
+                        <Avatar user={user} alt={user.name} size='size-16' />
 
-                        <div>
+                        <div className='min-w-0'>
                           <h3 className='font-semibold text-lg'>{user.name}</h3>
                           {user.location && (
                             <div className='flex items-center text-xs opacity-70 mt-1'>
@@ -103,18 +104,18 @@ export default function Home() {
                       </div>
 
                       <div className='flex flex-wrap gap-1.5'>
-                        <span className='badge badge-secondary'>
+                        <span className='badge streamify-badge'>
                             {getLanguageFlag(user.nativeLanguage)}
                             Native: {capitalize(user.nativeLanguage)}
                         </span>
-                        <span className='badge badge-outline'>
+                        <span className='badge streamify-badge streamify-badge-outline'>
                             {getLanguageFlag(user.learningLanguage)}
                             Learning: {capitalize(user.learningLanguage)}
                         </span>
                     </div>
                     {user.bio && <p className='text-sm opacity-70'>{user.bio}</p>}
 
-                    <button className={`btn w-full mt-2 ${hasRequestBeenSent ? "btn-disabled" : "btn-primary"}`} 
+                    <button className={`btn w-full mt-2 rounded-xl ${hasRequestBeenSent ? "btn-disabled" : "btn-primary"}`} 
                     onClick={() => {
                       mutate(user._id, {
                         onSuccess: () => {
