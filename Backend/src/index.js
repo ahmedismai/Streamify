@@ -15,22 +15,32 @@ const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// app.use(
-//   cors()
-//   // cors({
-//   //   origin: ["http://localhost:5173", "https://streamify-fsld.vercel.app"],
-//   //   credentials: true,
-//   //   methods: ["GET", "POST", "PUT", "DELETE"]
-//   // })
-// );
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://streamify-6saj.vercel.app",
+  "https://streamify-xv75.vercel.app",
+  "https://lingostream.netlify.app",
+  ...String(process.env.CLIENT_URL || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://streamify-6saj.vercel.app",
-      "https://lingostream.netlify.app",
-    ],
+    origin(origin, callback) {
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        /^https:\/\/streamify-[a-z0-9]+\.vercel\.app$/.test(origin)
+      ) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`Origin ${origin} is not allowed by CORS`));
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
 app.use(express.json());
