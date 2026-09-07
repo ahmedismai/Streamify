@@ -14,7 +14,7 @@ import Avatar from '../Avatar/Avatar.jsx'
 export default function Onboarding() {
   const { authUser}=useAuthUser()
   const [formState , setFormState] = useState({
-    fullName: authUser?.fullName || "",
+    fullName: authUser?.name || "",
     bio: authUser?.bio || "",
     nativeLanguage: authUser?.nativeLanguage || "",
     learningLanguage: authUser?.learningLanguage || "",

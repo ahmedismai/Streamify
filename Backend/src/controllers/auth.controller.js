@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import jwt from "jsonwebtoken"
 import * as crypto from 'node:crypto';
 import { sendEmail } from "../utils/sendEmail.js";
+import { getAuthCookieOptions } from "../lib/httpConfig.js";
 
 
 export async function signup(req, res){
@@ -52,11 +53,8 @@ export async function signup(req, res){
             expiresIn:"7d"
         })
         res.cookie("jwt",token , {
+            ...getAuthCookieOptions(),
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            httpOnly: true,
-            sameSite:"none",
-            // sameSite:"strict",
-            secure:process.env.NODE_ENV === "production"
         })
         res.status(201).json({success:true , user:newUser})
     } catch (error) {
@@ -86,11 +84,8 @@ export async function login(req, res){
             expiresIn:"7d"
         })
         res.cookie("jwt",token , {
+            ...getAuthCookieOptions(),
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            httpOnly: true,
-            // sameSite:"strict",
-            sameSite:"none",
-            secure:process.env.NODE_ENV === "production"
         })
         res.status(200).json({success:true , user})
     } catch (error) {
@@ -101,9 +96,7 @@ export async function login(req, res){
 
 export async function logout(req, res) {
     res.clearCookie("jwt", {
-      httpOnly: true,
-      sameSite: "none",
-      secure: process.env.NODE_ENV === "production",
+      ...getAuthCookieOptions(),
     });
     res.status(200).json({ success: true, message: "Logout successful" });
   }

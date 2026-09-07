@@ -133,7 +133,7 @@ export async function getFriendRequest(req, res){
 export async function getOutGoingFriendReqs(req, res){
     try {
         const outGoingReqs = await FriendRequest.find({sender:req.user.id , status:"pending"})
-        .populate("recipient", "name:fullName profilePic nativeLanguage learningLanguage")
+        .populate("recipient", "name profilePic nativeLanguage learningLanguage")
         res.status(200).json({outGoingReqs})
     } catch (error) {
         console.error("Error to getOutGoingFriendReqs controller",error.message)

@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "node:path";
 import { fileURLToPath } from "url";
+import { getAllowedOrigins, getFrontendDistPath, isOriginAllowed } from "./lib/httpConfig.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,25 +16,12 @@ const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://streamify-6saj.vercel.app",
-  "https://streamify-xv75.vercel.app",
-  "https://lingostream.netlify.app",
-  ...String(process.env.CLIENT_URL || "")
-    .split(",")
-    .map((origin) => origin.trim())
-    .filter(Boolean),
-];
+const allowedOrigins = getAllowedOrigins();
 
 app.use(
   cors({
     origin(origin, callback) {
-      if (
-        !origin ||
-        allowedOrigins.includes(origin) ||
-        /^https:\/\/streamify-[a-z0-9]+\.vercel\.app$/.test(origin)
-      ) {
+      if (isOriginAllowed(origin, allowedOrigins)) {
         return callback(null, true);
       }
 
@@ -56,7 +44,7 @@ app.get("/", (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  const frontendPath = path.join(__dirname, "../../frontend/dist");
+  const frontendPath = getFrontendDistPath(__dirname);
   app.use(express.static(frontendPath));
   app.get("*", (req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
