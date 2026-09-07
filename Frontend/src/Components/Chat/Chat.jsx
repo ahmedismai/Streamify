@@ -30,7 +30,7 @@ export default function ChatPage() {
 
       try {
         console.log("Initializing stream chat client...");
-        const client = StreamChat.getInstance(STREAM_API_KEY)
+        const client = StreamChat.getInstance(tokenData?.apiKey || STREAM_API_KEY)
         await client.connectUser({
           id:authUser._id,
           name:authUser.name, 

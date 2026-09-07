@@ -45,7 +45,7 @@ export default function Call() {
         };
 
         const videoClient = new StreamVideoClient({
-          apiKey: STREAM_API_KEY,
+          apiKey: tokenData?.apiKey || STREAM_API_KEY,
           user,
           token: tokenData.token,
         });
